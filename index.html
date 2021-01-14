@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">	
+	 <meta charset="utf-8">
+    <meta name="description" content="It's a good game(maybe)">
+	  <meta name="keywords" content="Hyrdaboo game, hyrdaboo, html game, stick jump">
+  	<meta name="author" content="Hyrdaboo">
+  <title>Stick Jump</title>
+<link href="./assets/fonts/googleFont.css" rel="stylesheet">
+<link rel='icon' href="assets/images/icon.jpg">
+<style>
+	img[alt="www.000webhost.com"]{ display: none!important; }		
+				#version{
+								color:white;
+								position:fixed;
+								bottom:0;
+								left:0;
+				}
+				#insta{
+								bottom:2%;
+								right:3%;
+								position:fixed;
+								width: 2em;
+								height: 2em;
+								border:2px solid white;
+								border-radius:10px 10px 10px 10px;
+				}
+				
+				#insta::before {
+				position:absolute;
+				content:"";
+				top:0.4em;
+								left:0.3em;		
+								width: 1em;
+								height: 1em;
+							 border:2px solid white;
+							 border-radius: 10px 10px 10px 10px;																											
+				}
+			#insta::after{
+								position:absolute;
+								content:".";
+								color:white;
+								font-size:40px;
+								top:-0.7em;
+								right:0;
+				}
+		#bu{
+		position:fixed;
+		font-family:'Audiowide';
+		color:white;
+		text-shadow:4px 1px 1px blueviolet;
+		top:0%; 
+		left:40%;
+		z-index:999;
+		font-size:50px;
+		display:none;
+		}		
+		body {
+				
+		}
+		html{
+				-webkit-user-select:none;
+			background: url("./assets/images/maps/background-city.jpg");
+				background-repeat:no repeat;
+				background-size: cover;
+				background-attachment:fixed;
+		}
+canvas {
+    border: 1px solid transparent;
+    background-color: transparent;
+    position:absolute;
+    bottom:60px;    
+}
+
+#rope-animation {
+		width: 100px;
+		height: 100px;
+		position: fixed;
+		bottom: 10%; /*10 percent*/
+		left: 36%; /*35.9 percent 36left for wacky version*/
+		display:none;
+		z-index: -99;
+}
+#menu-container{
+      position:fixed;                   
+      text-align:center;
+      vertical-align:middle; 
+      margin:30%;
+      font-family: Verdana sans-serif;
+				font-weight:bold;
+				color:white;
+}
+#playbtn{
+				font-size:3.2em;
+				position:fixed;
+				top:20%;
+}
+#playbtn:active{
+				color:red;
+				animation:0.2s select;
+				font-size:3.5em;
+				top:19%;
+}
+#Settings{
+position:fixed;
+				font-size:1.7em;
+				bottom:46%;
+}
+#Settings:active{
+				animation:0.2s select;
+				font-size:2em;
+				bottom:44%;
+}
+@keyframes select{
+			from{color:white; font-weight:bold;}	
+			to{color:red; font-weight:900;}
+}
+#settingsMenu{
+     position:fixed;
+				width: 90%;
+				height: 70%;
+				z-index:999;
+				border:5px solid #00385f;
+				border-radius:10px 10px 10px 10px;
+				background: radial-gradient(ellipse at top, #0069b2, #005d9e, #00497c);				
+				margin-top:5%;
+				display:none;
+}
+#quit{
+   position:absolute;
+		width: 0;		
+		height: 5%;		
+		transform:rotate(-90deg);
+		border-left:0.8em solid transparent;
+		border-right:0.8em solid transparent;
+		border-bottom:1.1em solid white;
+}
+#quit::after{
+				position:absolute;
+				content:"";
+				transform:rotate(90deg);				
+				width: 1em;
+				height: 0.6em;
+				left:-0.5em;
+			 bottom:-1.8em;		
+				background:white;						
+}
+#heading{
+				color:white;
+				position:absolute;
+				left:0%;
+				top:-5%;
+				border:2px solid white;
+				//border-top: 2px solid transparent;
+				border-radius:5px 5px 30px 30px;
+				padding-right:35.5%;
+				padding-left:35.5%;
+				padding-top:5%;
+				font-family:Verdana sans-serif;
+				padding-bottom:5%;
+}
+#sound{
+	width: 87%;
+	height: 10%;		
+	position:absolute;
+	border:1px solid white;
+	border-radius: 10px 10px 10px 10px;	
+	margin-top:30%;
+	margin-left:5%;
+	font-size:20px;	
+	font-weight:bold;
+	font-family:Verdana sans-serif;
+	color:white;
+	padding-top:5%;
+	padding-left:3%;
+	background: indigo;
+}
+#music{
+	width: 87%;
+	height: 10%;		
+	position:absolute;
+	border:1px solid white;
+	border-radius: 10px 10px 10px 10px;	
+	margin-top:50%;
+	margin-left:5%;		
+	font-size:20px;	
+	font-weight:bold;
+	font-family:Verdana sans-serif;
+	color:white;
+	padding-top:5%;
+	padding-left:3%;
+	background: indigo;
+}
+#vibration{
+	width: 87%;
+	height: 10%;		
+	position:absolute;
+	border:1px solid white;
+	border-radius: 10px 10px 10px 10px;	
+	margin-top:70%;
+	margin-left:5%;		
+	font-size:20px;	
+	font-weight:bold;
+	font-family:Verdana sans-serif;
+	color:white;
+	padding-top:5%;
+	padding-left:3%;
+	background: indigo;
+}
+#share{
+		position:absolute;
+		width: 44%;		
+		height: 13%;
+		border:1px solid white;
+		border-radius: 10px 10px 10px 10px;	
+		bottom:3%;
+		left:4.8%;
+		font-size:20px;	
+	font-weight:bold;
+	font-family:Verdana sans-serif;
+	color:white;
+	vertical-align:middle;
+	text-align:center;
+	padding-top:7%;
+}
+#reset{
+		position:absolute;
+		width: 44%;		
+		height: 13%;
+		border:1px solid white;
+		border-radius: 10px 10px 10px 10px;	
+		bottom:3%;
+		left:50.2%;
+		font-size:20px;	
+	font-weight:bold;
+	font-family:Verdana sans-serif;
+	color:white;
+	vertical-align:middle;
+	text-align:center;
+	padding-top:7%;		
+}
+#maps{
+position:fixed;
+left:0;
+top:0;
+	width: 100%;	
+	height: 100%;
+	background: radial-gradient(ellipse at top, #093675, #072959, #03152d);	
+	display:none;	
+	color:white;
+	text-align:center;
+	vertical-align:middle;
+	color:white;
+	font-family:Verdana sans-serif;
+	font-weight:bold;
+}
+#mapHeading{
+	position:relative;
+	top:5%;
+	font-family:Verdana sans-serif;
+	font-weight:bold;			
+}
+#toLeft{
+				top:14em;
+				left:0;
+				position:absolute;
+				transform:rotate(-90deg) rotateY(180deg);
+				width: 14%;
+				z-index:99;
+				height: 8%;
+}
+#toLeft:active{
+		opacity:0.6;		
+		width: 16%;
+		height: 9%;
+		top:14em;
+}
+#toRight{
+				top:14em;
+				right:0;
+				position:absolute;
+				transform:rotate(90deg);
+				width: 14%;
+				height: 8%;
+				z-index:99;
+}
+#toRight:active{
+			opacity:0.6;		
+		width: 16%;
+		height: 9%;
+		top:14em;	
+}
+#allMaps{
+position:fixed;
+				width: 320%;
+				height: 50%;				
+				border:1px solid transparent;
+				transition:0.5s;
+}
+#bigCity{
+		position:relative;
+		width: 17%;		
+		height: 17%;
+		background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("./assets/images/maps/background-city.jpg");
+		background-size:cover;	
+		text-align:center;
+		vertical-align:middle;					
+		top:30%;
+		background-clip:padding-box;
+		left:6%;
+		padding-top:10%;
+		border-radius:10px 10px 10px 10px;
+		border:10px ridge #800005;		
+		background-position:center;
+		font-size:30px;		
+		transition:0.5s;
+}
+#bigCityNight{
+		position:relative;
+		width: 17%;		
+		height: 17%;
+		background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("./assets/images/maps/big-city-night.jpg");
+		background-size:cover;	
+		text-align:center;
+		vertical-align:middle;					
+		top:-30.5%;
+		left:30%;
+		padding-top:10%;
+		border-radius:10px 10px 10px 10px;
+		border:10px ridge #800005;		
+		background-position:center;
+		font-size:30px;		
+		transition:0.5s;
+}
+
+#bigCityFutureLock{
+		position:absolute;			  
+	  width: 50%;
+	  bottom:30%;	  	  
+	  height: 70%;
+	  left:25%;
+}
+#bigCityNightLock{
+		position:absolute;			  
+	  width: 50%;
+	  bottom:30%;	  	  
+	  height: 70%;
+	  left:25%;
+}
+#buyNight{
+		font-size:20px;	
+		position:relative;
+		bottom:-50%;	
+}
+#buyFuture{
+		font-size:20px;	
+		position:absolute;
+		bottom:-25%;	
+		left:30%;
+}
+#bigCityFuture{
+		position:relative;
+		width: 17%;		
+		height: 17%;
+		background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("./assets/images/maps/big-city-future.jpg");
+		background-size:cover;	
+		text-align:center;
+		vertical-align:middle;					
+		top:-94%;
+		left:53%;
+		padding-top:10%;
+		border-radius:10px 10px 10px 10px;
+		border:10px ridge #800005;		
+		background-position:center;
+		font-size:30px;		
+		transition:0.5s;
+}
+#giantGym{
+		position:relative;
+		width: 17%;		
+		height: 17%;
+		background:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("./assets/images/maps/gym.jpg");
+		background-size:cover;	
+		text-align:center;
+		vertical-align:middle;					
+		top:-155%;
+		left:76%;
+		padding-top:10%;
+		border-radius:10px 10px 10px 10px;
+		border:10px ridge #800005;		
+		background-position:center;
+		font-size:30px;		
+		transition:0.5s;
+}
+#gymLock{
+	position:absolute;			  
+	  width: 50%;
+	  bottom:30%;	  	  
+	  height: 70%;
+	  left:28%;			
+}
+#buyGym{
+	font-size:20px;	
+		position:absolute;
+		bottom:-25%;	
+		left:30%;			
+}
+#credits{
+position:fixed;
+top:0;
+left:0;
+z-index:99;
+color:white;
+				width: 100%;
+				font-family:Verdana sans-serif;
+				font-weight:bold;
+				height: 100%;
+				background: black;
+				display:none;
+}
+#coinsAmount{
+		color:black;
+		font-weight:bold;
+		position:fixed;		
+		top:2%;
+		font-family:Verdana sans-serif;
+		left:82%;
+		font-size:20px;		
+		z-index:99;
+}
+#coinImage{
+				position:fixed;
+				top:0;
+				right:20%;
+				z-index:99;				
+				width:50px;
+				height: 50px;
+}
+#cup{
+     	position:fixed;
+				top:0;
+				right:60%;
+				z-index:99;				
+				width:50px;
+				height: 50px;		
+				z-index:99;	
+}
+#hi{
+		color:black;
+		font-weight:bold;
+		position:fixed;		
+		top:-2%;
+		font-family:Verdana sans-serif;
+		left:42%;
+		font-size:20px;		
+		z-index:99;
+}
+#gameOver{
+				display:none;
+				position:fixed;
+				z-index:9999;
+}
+#deadAlert{
+				width: 0; /*75*/
+				height: 0%; /*70*/
+				position:fixed;
+				z-index:99;
+				top:12%;
+				left:13%;		
+				transition:0.5s;		
+}
+#scoreWhenDie{
+	color: white;		
+	position:fixed;
+	font-weight:bold;
+	text-shadow:2px 2px 10px white;
+	top:38%;/*38*/
+	left:43%;/*43*/
+	z-index:99;
+	font-size:5em;
+	font-family:Verdana sans-serif;
+}
+#coinsWhenDie{
+	font-family:Verdana sans-serif;	
+	z-index:99;
+	position:fixed;
+	color:white;
+		text-shadow:2px 2px 10px white;
+	top:55%;
+	left:67%;
+	font-size:20px;
+	font-weight:bold;
+}
+#hiWhenDie{
+	font-family:Verdana sans-serif;	
+	z-index:99;
+	position:fixed;
+	color:white;
+	text-shadow:2px 2px 10px white;
+	top:55%;
+	left:30%;
+	font-size:20px;
+	font-weight:bold;
+}
+#goHome{
+				width: 20%;
+				height: 15%;
+				z-index:99;
+				top:58%;
+				left:22%;
+				position:fixed;
+				background: transparent;
+				opacity:0.5;
+}
+#replay{
+				width: 26%;
+				height: 17%;
+				z-index:99;
+				top:58%;
+				left:53%;
+				border-radius:50%;
+				position:fixed;
+				background: transparent;
+				opacity:0.5;
+}
+#loadingAnimation{
+		position:fixed;
+		width: 100%;		
+		height: 100%;
+		top:0;
+		left:0;
+		display:block;
+		background: black;
+		z-index:999;
+		color: white; 
+		font-family:Verdana sans-serif;		
+		font-weight:bold;
+		text-align:center;
+		vertical-align:middle;
+}
+#loadingWord{
+		font-size:2em;		
+		top:30%;
+		position:relative;
+		text-shadow:2px 2px 10px white;
+		animation:2s hyrdaboo linear 1;
+}
+@keyframes hyrdaboo{
+		0%{text-shadow:0px 0px 10px white;}	
+		50%{text-shadow:0px 0px 50px white;}	
+		100%{text-shadow:0px 0px 10px white;}
+}
+#progressBar{
+				position:fixed;
+				height: 2%;
+				width: 40%;		/*40	*/
+				background: white;
+				top:70%;
+				left:6.5em;
+				animation: 5s loading linear 1;
+}
+#progressBarBorder{
+	position:fixed;
+	content:"";	
+	top:69.15%;
+	left:27.8%;
+  width: 41%;	
+	height: 3%;	
+	z-index:99;
+	border:2px solid white;	
+}
+@keyframes loading{
+	from{width: 0;}
+	to{width: 40%;}			
+}
+#tapToContinue{
+				position:fixed;
+				animation:continue 1s linear infinite;
+				font-size: 18px;
+				bottom:15%;
+				display:none;
+				left:32%;
+}
+@keyframes continue{
+				0%{opacity:0;}
+				50%{opacity:1;}
+				100%{opacity:0;}
+}
+#fullscreenAgain{
+	font-family:Verdana sans-serif;
+	color:black;
+	font-weight:bold;
+	font-size:25px;		
+	z-index:9999;	
+	position:fixed;
+	display:none;
+	animation:myFullscreen 1s linear infinite;
+}
+@keyframes myFullscreen{
+				0%{opacity:0;}
+				50%{opacity:1;}
+				100%{opacity:0;}
+}
+@media screen and (min-width:920px){
+		body{display:none;}
+		html::after{
+						content:"Looks like you are on desktop try again with phone";
+						font-size:80px;						
+		}
+}
+@media screen and (min-width:720px){
+		body{display:none;}
+		html::after{
+						content:"Looks like you are on desktop or tablet try again with phone";
+						font-size:80px;						
+		}
+}
+</style>
+</head>
+<body onload="loadingEffects()" id="body">	
+<p id="fullscreenAgain" onclick="backThere()">Tap to enter fullscreen mode</p>				
+<div id="loadingAnimation">
+	<p id="loadingWord">HYRDABOO</p>		
+	<p id="progressBar"></p>	
+	<p id="progressBarBorder"></p>	
+	<span onclick="playMusic()" id="tapToContinue"><span onclick="fullscreen()">Tap to continue</span></span>
+</div>				
+<div id="gameOver">				  
+<img id="deadAlert" src="./assets/images/objects/GameOver.png" alt="game over">	
+<span id="scoreWhenDie"></span>		
+<span id="coinsWhenDie">0</span>
+<span id="hiWhenDie">0</span>
+<p id="goHome" onclick="goHome()"></p>
+<p id="replay" onclick="startGame()"></p>
+</div>	
+<img id="cup" src="./assets/images/objects/cup.png" alt="cup">		
+				<img id="coinImage" src="assets/images/objects/coin.png" alt="coin">
+				<span id="coinsAmount"></span>	
+	<div id="credits">									
+		<p id="quit" onclick="closeCredits()"></p>			
+<h1 style="text-align:center; vertical-align:middle;">Credits</h1>	<br>
+<p style="font-size:20px; left:10px; position:absolute;">
+	Player - You<br>
+	Graphics - Farid Amanov<br>
+	Animations - Fakhri Amanov<br>
+	Maps - Fakhri Amanov<br>
+	Programming - Fakhri Amanov, Farid Amanov		
+</p>
+	</div>							 
+ 		<span id="version">v 1.0.0</span>
+				<a href="https://www.instagram.com/
+				justinstauser__/" id="insta" ></a>
+		<div id="menu-container">
+				<p id="playbtn" onclick="selectMap()">PLAY</p>		
+				<p id="Settings" onclick="showSettings()">SETTINGS</p>				
+		</div>		
+		
+ <p id="bu">0</p> 
+   
+<p id="hi">0</p> 
+<img id="rope-animation" src="./assets/images/rope/rope-down-t.png" alt="rope">
+<div id="settingsMenu">
+	<h2 id="heading">Settings</h2>
+	<p id="quit" onclick="closeSettings()"></p>
+	<div onclick="soundSettings()" id="sound">Sound effects:<span id="soundSwitch"> ON</span></div>	
+	<div onclick="musicSettings()" id="music">Music:<span id="musicSwitch"> ON</span></div>		
+	<div onclick="vibrationSettings()" id="vibration">Vibration: <span id="vibrationSwitch"> ON</span></div>
+	<div onclick="showCredits();" id="share">Credits</div>
+	<div onclick="shareMe()" id="reset">Share</div>
+</div>
+<div id="maps">
+<p id="quit" onclick="closeMaps()"></p>			
+				<h1 id="mapHeading">Select a map</h1>
+				<span onclick="mapToLeft()"><img  id="toLeft" src="./assets/images/objects/switch-map-btn.png" alt="switch button"></span>
+			<span onclick="mapToRight()"><img id="toRight" src="./assets/images/objects/switch-map-btn.png" alt="switch button"></span>
+<div id="allMaps">				
+<div id="bigCity" onclick="startBigCity()">Big City</div>		
+	<div id="bigCityNight" onclick="startBigCityNight()">Big City Night
+		<img id="bigCityNightLock" src="./assets/images/objects/lock.png" alt="lock">
+		<span id="buyNight">buy 500Q</span>
+	</div>	
+		<div id="bigCityFuture" onclick="startBigCityFuture()">Future city
+		<img id="bigCityFutureLock" src="./assets/images/objects/lock.png" alt="lock">
+	<span id="buyFuture">buy 1000Q</span>
+		</div>	
+	<div id="giantGym" onclick="startGym()">Giant gym
+		<img id="gymLock" src="./assets/images/objects/lock.png" alt="lock">
+	<span id="buyGym">buy 2500Q</span>
+		</div>	
+</div>
+<script>						
+function earnCoins() {
+			earnSomeCoins = Math.round(Math.pow(c, 1.5) / 4);			
+			newCoins = earnSomeCoins + coins;			 
+			coins = newCoins;								
+}
+	function silentWhenDie(){
+ropeEffect.muted = true;
+}	
+function silentWhenDie2(){
+scoreEffect.muted = true;
+}			
+	function showInterval() {
+			console.log(intr);
+	}			
+////////////
+// OBJECTS //
+////////////
+var myGamePiece;
+var jumpingRope;
+var score;
+var coins = 0;
+var coinsAmount = document.getElementById("coinsAmount");
+var disappearCanvas = document.getElementsByTagName("canvas");
+coinsAmount.textContent = coins;
+var newCoins;
+var t;
+var ropeAnim = document.getElementById("rope-animation");
+var scoreboard = document.getElementById("bu");
+var intr; 
+var HI = 0;
+var c = -1;
+var hiIndicator = document.getElementById("hi");
+hiIndicator.textContent = HI;
+
+function hiScore() {
+if(c > HI) {
+	document.getElementById	("hi").textContent = c;	 	
+	HI = c;	
+ }		
+ else{
+ 		return false;
+ }
+}
+
+function changeTimer(){ 
+
+            t = t * 0.9999; 
+
+        } 
+
+function startGame() {
+    myGamePiece = new component(75, 150, "./assets/images/player/stand.png", 132.5, 240, "image");
+    jumpingRope = new component(40, 2, "transparent", 150, 268);
+    score = new component("20px", "cursive", "transparent", 20, 30, "text");      
+    t = 20;
+    c = -1;
+    clearInterval(intr);
+    myGameArea.start();
+    coinsAmount.textContent = coins;
+    ropeAnim.style.display = "block";   document.getElementById("gameOver").style.display = "none";
+    scoreboard.style.display = "block";   
+   document.getElementById("scoreWhenDie").style.left = "43%";		   
+   
+for (var i = 0; i < disappearCanvas.length; i++) { 
+disappearCanvas[i].style.display = "block";     
+}
+}
+
+////////////////
+// GAME AREA //
+//////////////
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 340;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        
+       this.interval = setInterval(updateGameArea,20);
+       
+           },
+     clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+////////////////
+// COMPONENTS //
+////////////////
+
+function component(width, height, color, x, y, type) {
+this.type = type;
+if(type == "image") {
+		this.image = new Image();
+		this.image.src = color;
+}
+this.width = width;
+this.height = height;
+this.speedY = 0;
+this.x = x;
+this.y = y;
+this.type = type;
+this.update = function() {
+ctx = myGameArea.context;
+if(type == "image") {
+		ctx.drawImage(this.image, 
+				this.x,
+				 this.y,
+				  this.width, this.height);
+}
+
+if(this.type == "text") {
+ctx.font = this.width + " " + this.height;
+ctx.fillStyle = color;
+ctx.fillText(this.text, this.x, this.y);
+}
+
+else {
+ctx.fillStyle = color;
+ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+
+//////////////
+// POSITION //
+//////////////
+
+ }
+this.newPos = function () {
+myGamePiece.y += 1*myGamePiece.speedY;
+jumpingRope.y += 1.5*jumpingRope.speedY;
+
+////////////
+// CRASH //
+///////////
+
+////////////
+// MOVES //
+//////////
+
+if(myGamePiece.y <= 100) {
+myGamePiece.speedY = 0;
+myGamePiece.y = 100;
+myGamePiece.speedY += 1;
+ }
+if(jumpingRope.y <= 220) {					
+			ropeEffect = new Audio("./assets/media/Rope_sound.mp3");
+ropeEffect.play(); 
+soundSettings3();
+jumpingRope.speedY = 0;
+jumpingRope.y = 220;
+jumpingRope.speedY += 1;
+}
+if(myGamePiece.y < 120) {
+		myGamePiece.image.src = "./assets/images/player/jump.png";
+		
+}
+if(jumpingRope.y <= 268 && jumpingRope.y >= 262) {
+	ropeAnim.src = "./assets/images/rope/rope-down-t.png";			
+	ropeAnim.style.bottom = "9%";
+	ropeAnim.style.left = "36%";
+}
+if(jumpingRope.y < 262) {
+	ropeAnim.src = "./assets/images/rope/rope-2-12-t.png";			
+	ropeAnim.style.bottom = "9%";
+	ropeAnim.style.left = "36%";
+}
+if(jumpingRope.y < 256) {
+	ropeAnim.src = "./assets/images/rope/rope-3-13-t.png";	
+	ropeAnim.style.bottom = "9%";
+	ropeAnim.style.left = "36%";	
+}
+if(jumpingRope.y < 250) {
+	ropeAnim.src = "./assets/images/rope/rope-4-t.png";			
+	ropeAnim.style.bottom = "9%";
+	ropeAnim.style.left = "36%";
+}
+if(jumpingRope.y < 244) {
+	ropeAnim.src = "./assets/images/rope/rope-5-11-t.png";			
+	ropeAnim.style.bottom = "18.5%";
+	ropeAnim.style.left = "36%";
+}
+if(jumpingRope.y < 238) {
+	ropeAnim.src = "./assets/images/rope/rope-6-10-t.png";			
+	ropeAnim.style.bottom = "18.5%";
+	ropeAnim.style.left = "36%";
+}
+if(jumpingRope.y < 232) {
+	ropeAnim.src = "./assets/images/rope/rope-7-9-t.png";			
+	ropeAnim.style.bottom = "18.5%";
+	ropeAnim.style.left = "36%";
+}
+if(jumpingRope.y < 226) {
+	ropeAnim.src = "./assets/images/rope/rope-up-t.png";			
+	ropeAnim.style.bottom = "21.9%";
+	ropeAnim.style.left = "36%";
+}
+
+////////////////////////////
+// BOTTOM,GROUND & SCORE //
+//////////////////////////
+
+this.hitBottom();
+this.bottom();
+ }
+this.bottom = function() {
+var ground = myGameArea.canvas.height - jumpingRope.height;
+if(jumpingRope.y >= ground) {
+jumpingRope.y = ground;
+jumpingRope.speedY = 0;
+c = c + 1;
+if(c > 0){		
+			scoreEffect = new Audio("./assets/media/score_point.mp3");
+scoreEffect.play(); 
+	soundSettings2();
+}					
+			ropeEffect = new Audio("./assets/media/Rope_sound.mp3");
+ropeEffect.play(); 
+soundSettings3();
+document.getElementById("bu").innerHTML = c;
+jumpingRope.speedY -= 1;
+ }
+}
+this.hitBottom = function() {
+var rockbottom = myGameArea.canvas.height - myGamePiece.height;
+if(this.y > rockbottom || this.y == rockbottom) {
+myGamePiece.y = rockbottom;
+myGamePiece.image.src = "./assets/images/player/stand.png";
+document.documentElement.onclick = function() {
+myGamePiece.speedY = 0;
+myGamePiece.speedY -= 1;
+  };
+ }
+ 
+ ////////////
+ // CLICK //
+ //////////
+ 
+if(this.y < rockbottom) {
+document.documentElement.onclick = function() {
+console.log("hello world")
+  };
+  }
+ }
+}
+
+//////////////
+// UPDATE //
+////////////
+
+function updateGameArea() {
+clearInterval(myGameArea.interval); 
+clearInterval(intr)
+		myGameArea.clear();
+score.update();
+var ne = Math.round(Math.pow(c, 1.5) / 4);
+coinsAmount.textContent = coins + ne;		
+hiScore();
+score.text = "SCORE: " + document.getElementById("bu").innerHTML;
+myGamePiece.newPos();
+myGamePiece.update();
+jumpingRope.update();
+      changeTimer(); 
+      intr = setInterval(updateGameArea, t);
+if(jumpingRope.y >= 267 && myGamePiece.y >= 120 && c >= 1) {
+if(vibration == true){ 											 									 									 									
+ 									navigator.vibrate([200]); 									
+ 											} 											 									
+ 									else{
+navigator.vibrate([0]); 						
+ 										}
+silentWhenDie();	
+silentWhenDie2();
+jumpingRope.speedY = 0;
+myGamePiece.speedY = 0;
+jumpingRope.y = 268;
+myGamePiece.y = 240;
+clearInterval(myGameArea.interval);
+clearInterval(intr);	
+hiScore();
+earnCoins();				
+dieEffect = new Audio("./assets/media/die.mp3");
+dieEffect.play(); 	
+if(allSoundEffects == false) {
+			dieEffect.muted = true;
+}
+coinsAmount.textContent = coins;
+alertLose();
+
+/*alert('Game Over! \n your score:' + c + '\n HI:' + HI + '\n Coins:' + coins);*/
+}
+       } 
+		
+</script>	
+<script>
+	var vibration = true;
+	var allSoundEffects = true;
+	var map2Owned = false;
+	var map3Owned = false;
+	var map4Owned = false;
+	var credits = document.getElementById("credits");		 	
+	var soundSwitch = 		document.getElementById("soundSwitch");		
+	var musicSwitch = 		document.getElementById("musicSwitch");		
+	var vibrationSwitch = 		document.getElementById("vibrationSwitch");		
+	var settings = document.getElementById("settingsMenu");		
+	var mainMenu = document.getElementById("menu-container");
+var mapMenu = document.getElementById("maps");
+var map1 = document.getElementById("allMaps");		
+var map2 = document.getElementById("bigCityNight");
+var map3 = document.getElementById("bigCityFuture");
+var map4 = document.getElementById("giantGym");
+var music = new Audio("./assets/media/music.mp3");
+var gameOverAlert = document.getElementById("deadAlert");
+function playMusic(){  
+document.getElementById("loadingAnimation").style.display = "none";
+music.play();
+music.autoplay = true;
+music.loop = true;
+}
+function alertLose() {		
+  document.getElementById("gameOver").style.display = "block";	
+ document.getElementById("scoreWhenDie").textContent = c;
+ 
+document.getElementById("coinsWhenDie").textContent = coins;
+
+document.getElementById("hiWhenDie").textContent = HI;
+ if(c >= 10) {
+ 	document.getElementById("scoreWhenDie").style.left = "35%";			
+ }
+if(c >= 100) { 	document.getElementById("scoreWhenDie").style.left = "27%";						
+ }
+  setTimeout(function () {
+  		gameOverAlert.style.width = "75%";
+		gameOverAlert.style.height = "70%";	
+  }, 1) 									
+}
+function goHome() {
+document.getElementById("insta").style.display = "block";
+				document.getElementById("version").style.display = "block";	
+	mainMenu.style.display = "block";	document.getElementById("gameOver").style.display = "none";
+document.getElementById("bu").style.display = "none";
+ropeAnim.style.display = "none";
+for (var i = 0; i < disappearCanvas.length; i++) { 
+disappearCanvas[i].style.display = "none"; 
+}
+}
+
+function soundSettings() {										
+ 							if(soundSwitch.textContent == "OFF"){ 											 									 									
+ 									soundSwitch.textContent = "ON";
+ 								clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play();
+allSoundEffects = true;
+dieEffect.muted = true;
+ 											} 											 									
+ 									else{
+ 													soundSwitch.textContent = "OFF"; 							
+ 											allSoundEffects = false;		
+ 														
+ 										}		 								
+}
+function soundSettings2() {
+	if(soundSwitch.textContent == "OFF") {
+		scoreEffect.muted = true;		
+	}	
+	else{
+			scoreEffect.muted = false;							
+	}
+}
+function soundSettings3() {
+	if(soundSwitch.textContent == "OFF") {
+		ropeEffect.muted = true;		
+	}	
+	else{
+			ropeEffect.muted = false;							
+	}
+}
+function musicSettings() {										
+ 							if(musicSwitch.textContent == "OFF"){ 											 									 									
+ 									musicSwitch.textContent = "ON";
+ 									music.muted = false; 									
+ 											} 											 									
+ 									else{
+ 													musicSwitch.textContent = "OFF";
+ 													music.muted = true; 										
+ 										}		 								
+}
+function vibrationSettings() {										
+ 							if(vibrationSwitch.textContent == "OFF"){ 											 									 									
+ 									vibrationSwitch.textContent = "ON";
+ 									navigator.vibrate([200]);
+ 									vibration = true;
+ 											} 											 									
+ 									else{
+navigator.vibrate([0]);				vibrationSwitch.textContent = "OFF";
+vibration = false;										
+ 										}		 								
+}
+					function selectMap() {
+			if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}			
+clickEffect.play(); 	
+	setTimeout(function(){
+mapMenu.style.display = "block";
+}, 200);
+	}
+function	startBigCity(){
+			
+    startGame();
+			mapMenu.style.display = "none";
+			mainMenu.style.display = "none";
+			document.getElementById("insta").style.display = "none";
+				document.getElementById("version").style.display = "none";	
+			document.documentElement.style.background = "url('./assets/images/maps/background-city.jpg')";
+		document.documentElement.style.backgroundSize = "cover";
+	document.documentElement.style.backgroundRepeat = "no repeat";	
+	document.documentElement.style.backgroundAttachment = "fixed";
+}
+
+////////////////
+// Night city//
+//////////////
+
+function	startBigCityNight(){		
+if(coins >= 500) {		document.getElementById("buyNight").textContent = "Owned";
+document.getElementById("bigCityNightLock").style.display = "none";
+document.getElementById("bigCityNight").style.background = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('./assets/images/maps/big-city-night.jpg')";
+document.getElementById("bigCityNight").style.backgroundSize = "cover";
+document.getElementById("bigCityNight").style.backgroundPosition = "center";
+cashSound = new Audio("./assets/media/buy.mp3")
+cashSound.play();
+if(allSoundEffects == false) {
+			cashSound.muted = true;
+}
+coins = 	coins - 500;
+coinsAmount.textContent = coins;
+}
+if(document.getElementById("buyNight").textContent == "Owned") {
+map2.onclick = function() {
+			map2Owned = true;			
+			if(map2Owned == true) {						
+console.log(coins);
+			startGame();
+			mapMenu.style.display = "none";
+			mainMenu.style.display = "none";
+			document.getElementById("insta").style.display = "none";	document.getElementById("version").style.display = "none";	
+			document.documentElement.style.background = "url('./assets/images/maps/big-city-night.jpg')";
+	document.documentElement.style.backgroundSize = "cover";
+	document.documentElement.style.backgroundRepeat = "no repeat";	
+	document.documentElement.style.backgroundAttachment = "fixed";		
+	}	
+}			
+}
+	else{					
+					return false;
+	}
+}
+
+/////////////////
+// future city//
+///////////////
+
+function	startBigCityFuture(){		
+	if(coins >= 1000) {	document.getElementById("buyFuture").textContent = "Owned";	
+	document.getElementById("bigCityFutureLock").style.display = "none";
+document.getElementById("bigCityFuture").style.background = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('./assets/images/maps/big-city-future.jpg')";
+document.getElementById("bigCityFuture").style.backgroundSize = "cover";
+document.getElementById("bigCityFuture").style.backgroundPosition = "center";
+	cashSound = new Audio("./assets/media/buy.mp3")
+cashSound.play();
+if(allSoundEffects == false) {
+			cashSound.muted = true;
+}
+	coins = 	coins - 1000;
+	coinsAmount.textContent = coins;
+}
+if(document.getElementById("buyFuture").textContent == "Owned") {
+map3.onclick = function() {
+map3Owned = true;
+	if(map3Owned == true) {	
+console.log(coins);
+			startGame();
+			mapMenu.style.display = "none";
+			mainMenu.style.display = "none";
+			document.getElementById("insta").style.display = "none";	document.getElementById("version").style.display = "none";	
+			document.documentElement.style.background = "url('./assets/images/maps/big-city-future.jpg')";
+		document.documentElement.style.backgroundSize = "cover";
+	document.documentElement.style.backgroundRepeat = "no repeat";	
+	document.documentElement.style.backgroundAttachment = "fixed";
+	}		
+}
+}
+	else{
+					return false;
+	}
+}
+
+/////////////////
+// GYM MAP//////
+///////////////
+
+function	startGym(){		
+	if(coins >= 2500) {	document.getElementById("buyGym").textContent = "Owned";	
+	document.getElementById("gymLock").style.display = "none";
+document.getElementById("giantGym").style.background = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('./assets/images/maps/gym.jpg')";
+document.getElementById("giantGym").style.backgroundSize = "cover";
+document.getElementById("giantGym").style.backgroundPosition = "center";
+	cashSound = new Audio("./assets/media/buy.mp3")
+cashSound.play();
+if(allSoundEffects == false) {
+			cashSound.muted = true;
+}
+	coins = 	coins - 2500;
+	coinsAmount.textContent = coins;
+}
+if(document.getElementById("buyGym").textContent == "Owned") {
+map4.onclick = function() {
+map4Owned = true;
+	if(map4Owned == true) {	
+console.log(coins);
+			startGame();
+			mapMenu.style.display = "none";
+			mainMenu.style.display = "none";
+			document.getElementById("insta").style.display = "none";	document.getElementById("version").style.display = "none";	
+			document.documentElement.style.background = "url('./assets/images/maps/gym.jpg')";
+		document.documentElement.style.backgroundSize = "cover";
+	document.documentElement.style.backgroundRepeat = "no repeat";	
+	document.documentElement.style.backgroundAttachment = "fixed";
+	}		
+}
+}
+	else{
+					return false;
+	}
+}
+var tic = 0;
+	function mapToLeft(){
+	if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}			
+if(map1.style.left >= "0%") {
+		
+		map1.style.left = "0";
+		tic = 0;
+}
+else{
+	tic+=75
+map1.style.left = tic + "%";		
+console.log(tic);
+}
+	}
+	
+	function mapToRight(){
+			if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}			
+if(map1.style.left <= "-225%") {		
+		map1.style.left = "-225%";
+		tic = -225;
+}
+else{
+	tic-=75
+map1.style.left = tic + "%";		
+console.log(tic);
+}
+	}
+	function showSettings() {
+				if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}			
+setTimeout(function(){
+settings.style.display = "block";
+}, 200);
+	}
+	function closeSettings() {
+				if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}			
+settings.style.display = "none";
+	}
+function closeMaps() {
+				if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}			
+mapMenu.style.display = "none";
+	}	
+	function showCredits(){
+					if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}		
+credits.style.display = "block"	;
+settings.style.display = "none";
+	}
+	
+	function closeCredits() {
+	if(allSoundEffects == true) {						
+			clickEffect = new Audio("./assets/media/click_effect.mp3");
+clickEffect.play(); 
+}
+else{
+	clickEffect.muted = true;			
+}		
+			credits.style.display = "none";		
+			settings.style.display = "block";
+	}
+	
+function loadingEffects() {
+		setTimeout(function() {
+				document.getElementById("tapToContinue").style.display = "block";		
+		}, 5100);
+}
+function shareMe() {
+document.getElementById("fullscreenAgain").style.display = "block";
+closeFullscreen();
+if (navigator.share) {
+navigator.share({
+title: 'stick jump',
+text: "bruh this game totally sucks but i can't stop myself from playing you should check it out 👉👉👉",
+url: 'https://shkurkamaster.itch.io/stick-jump',
+})
+.then(() => console.log('Successful share'))
+.catch((error) => console.log('Error sharing', error));
+}
+else{
+				alert("an unexpected error ocured please try again later")
+				}
+}	
+function backThere() {		document.getElementById("fullscreenAgain").style.display = "none";		
+fullscreen();
+}
+	(function(){
+		map1.style.left = "-1%";
+		(function(){
+				map1.style.left = "0%";		
+		})()	;		
+		})();			
+</script>
+<script>
+	var elem = document.documentElement;		
+	function fullscreen(){ 				 						if(elem.requestFullscreen){ elem.requestFullscreen(); } else if(elem.webkitRequestFullscreen){ /* Safari */ elem.webkitRequestFullscreen(); } else if(elem.msRequestFullscreen){ /* IE11 */ elem.msRequestFullscreen(); } 		
+	}			
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
+}	
+</script>
+</body>
+</html>
